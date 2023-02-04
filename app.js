@@ -3,7 +3,7 @@ const mongoose=require("mongoose")
 const app=express()
 const PORT=5000 || process.env.PORT
 const {MONGOURI}=require("./config/keys")
-
+const cors=require("cors")
 
 
 
@@ -29,7 +29,9 @@ app.use(express.json())
 app.use(require("./routes/auth"))
 app.use(require("./routes/post"))
 app.use(require("./routes/user"))
-
+app.use(cors({
+    origin:"https://pr-insta-clone.netlify.app"
+}))
 
 if(process.env.NODE_ENV=="production"){
     app.use(express.static("frontend/build"))
